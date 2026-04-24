@@ -11,6 +11,7 @@ import { Music } from "@/components/wedding/Music";
 import { Gallery } from "@/components/wedding/Gallery";
 import { Rsvp } from "@/components/wedding/Rsvp";
 import { Goodbye } from "@/components/wedding/Goodbye";
+import { FloatingElements } from "@/components/wedding/FloatingElements";
 import { Toaster } from "@/components/ui/sonner";
 import { useReveal } from "@/hooks/use-reveal";
 
@@ -74,6 +75,7 @@ function Index() {
   useReveal();
   return (
     <main className="min-h-screen bg-cream text-foreground">
+      <FloatingElements />
       <Hero />
       <LiquidDivider fromColor="var(--cream)" toColor="var(--cream)" />
       <HunabKuCover />

@@ -106,6 +106,12 @@ export function Gallery() {
               cursor: pointer;
               position: relative;
               background: #f5f1e8;
+              transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .masonry-item:hover {
+              transform: translateY(-4px);
+              box-shadow: 0 20px 50px -15px rgba(26, 60, 52, 0.15);
+              border-color: rgba(212, 175, 55, 0.6);
             }
             .masonry-item:nth-child(3n) {
               grid-row: span 1.2;
@@ -160,10 +166,10 @@ export function Gallery() {
           `}</style>
 
           <div className="masonry-grid">
-            {displayedPhotos.map((photo) => (
+            {displayedPhotos.map((photo, index) => (
               <div
                 key={photo.id}
-                className="masonry-item"
+                className={`masonry-item reveal reveal-delay-${Math.min(Math.floor(index / 4) + 1, 5)}`}
                 onClick={() => openLightbox(photo.id)}
               >
                 {loadedImages.has(photo.id) ? (
@@ -199,10 +205,10 @@ export function Gallery() {
 
           {/* Botón "Ver más momentos" */}
           {!showAll && photos.length > 20 && (
-            <div className="mt-12 text-center">
+            <div className="mt-12 text-center reveal">
               <button
                 onClick={() => setShowAll(true)}
-                className="inline-block px-8 py-3 border-2 border-gold text-gold font-display italic rounded-lg hover:bg-gold hover:text-emerald-deep transition-all duration-300 hover:scale-105"
+                className="inline-block px-8 py-3 border-2 border-gold text-gold font-display italic rounded-lg hover:bg-gold hover:text-emerald-deep transition-all duration-300 hover:scale-105 hover:shadow-gold"
               >
                 Ver más momentos ({photos.length - 20} fotos)
               </button>

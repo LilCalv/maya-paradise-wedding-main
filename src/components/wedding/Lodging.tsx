@@ -15,7 +15,7 @@ function HotelCard({
   contact?: string;
 }) {
   return (
-    <div className="group rounded-xl border border-border bg-card p-6 transition-all hover:border-gold/60 hover:shadow-soft">
+    <div className="group rounded-xl border border-border bg-card p-6 transition-all hover:border-gold/60 hover:shadow-soft hover-lift">
       {badge && (
         <span className="mb-3 inline-block rounded-full bg-emerald-deep px-3 py-1 text-[0.6rem] uppercase tracking-[0.3em] text-cream">
           {badge}
@@ -82,37 +82,55 @@ export function Lodging() {
           </div>
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            <HotelCard
-              badge="Top · Sede"
-              name="Las Nubes de Holbox"
-              desc="Hotel Boutique frente al mar. Nuestro hotel sede."
-              url="http://lasnubesdeholbox.com"
-              contact="Reservas: Bianca Domínguez · +52 998 215 7272 · ventas@youandus.com.mx"
-            />
-            <HotelCard
-              name="Villas Flamingos"
-              desc="A 3–5 min andando. Nuestro vecino directo, en la misma playa."
-              url="https://www.villasflamingos.com/"
-              contact="📧 reservas@villasflamingos.com · 📱 +52 984 875 2167"
-            />
-            <HotelCard
-              name="Villas Caracol"
-              desc="A 5–7 min andando. Boutique, tranquilo y muy bien ubicado."
-              url="https://www.villascaracol.com/"
-              contact="📧 recepcion@villascaracol.com · 📱 +52 984 116 1721"
-            />
-            <HotelCard
-              name="Casa Hridaya"
-              desc="A 5–7 min andando. Pequeño, especial y con un ambiente muy relajado."
-              url="https://www.casahridaya.com.mx/"
-              contact="📧 holboxhridaya@gmail.com.mx · 📱 +52 811 189 8599"
-            />
-            <HotelCard
-              badge="Ambiente"
-              name="Villas HM Palapas del Mar"
-              desc="Hotel muy bonito y con más ambiente, cerca del centro de Holbox. 10–15 min en carrito."
-              url="https://www.hmhotels.com/"
-            />
+            <div className="reveal">
+              <HotelCard
+                badge="Top · Sede"
+                name="Las Nubes de Holbox"
+                desc="Hotel Boutique frente al mar. Nuestro hotel sede."
+                url="http://lasnubesdeholbox.com"
+                contact="Reservas: Bianca Domínguez · +52 998 215 7272 · ventas@youandus.com.mx"
+              />
+            </div>
+            <div className="reveal reveal-delay-1">
+              <HotelCard
+                name="Hotel Pelícano"
+                desc="A 3 minutos andando. Gran opción muy cerca de la fiesta."
+                url="#"
+                contact="📞 +52 984 4682 · 📧 reservaciones@pelicanorental.mx · Código: boda Carlos y Claudia Holbox"
+              />
+            </div>
+            <div className="reveal reveal-delay-2">
+              <HotelCard
+                name="Villas Flamingos"
+                desc="A 3–5 min andando. Nuestro vecino directo, en la misma playa."
+                url="https://www.villasflamingos.com/"
+                contact="📧 reservas@villasflamingos.com · 📱 +52 984 875 2167"
+              />
+            </div>
+            <div className="reveal reveal-delay-3">
+              <HotelCard
+                name="Villas Caracol"
+                desc="A 5–7 min andando. Boutique, tranquilo y muy bien ubicado."
+                url="https://www.villascaracol.com/"
+                contact="📧 recepcion@villascaracol.com · 📱 +52 984 116 1721"
+              />
+            </div>
+            <div className="reveal reveal-delay-4">
+              <HotelCard
+                name="Casa Hridaya"
+                desc="A 5–7 min andando. Pequeño, especial y con un ambiente muy relajado."
+                url="https://www.casahridaya.com.mx/"
+                contact="📧 holboxhridaya@gmail.com.mx · 📱 +52 811 189 8599"
+              />
+            </div>
+            <div className="reveal reveal-delay-5">
+              <HotelCard
+                badge="Ambiente"
+                name="Villas HM Palapas del Mar"
+                desc="Hotel muy bonito y con más ambiente, cerca del centro de Holbox. 10–15 min en carrito."
+                url="https://www.hmhotels.com/"
+              />
+            </div>
           </div>
         </div>
 
@@ -134,6 +152,9 @@ export function Lodging() {
                     <h4 className="font-display text-lg italic text-emerald-deep">Bus Privado desde Cancún</h4>
                     <p className="mt-2 text-sm leading-relaxed text-foreground/75">
                       Duración: <strong>2 horas 30 minutos</strong> desde el Aeropuerto de Cancún hasta Chiquilá
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-emerald-deep/90 font-medium">
+                      💡 Bus privado incluido si vuelas con los vuelos de Air Europa del día 1 y 3
                     </p>
                   </div>
                 </div>
@@ -190,15 +211,23 @@ export function Lodging() {
                 </h3>
               </div>
               <div className="space-y-4">
+                <div className="rounded-xl bg-gold/10 p-5 ring-2 ring-gold/40">
+                  <div className="flex gap-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
+                      <Wallet className="h-5 w-5" strokeWidth={2} />
+                    </span>
+                    <div>
+                      <h5 className="font-display text-lg italic text-emerald-deep font-semibold">⚠️ IMPORTANTE: Cambiar Efectivo en Cancún</h5>
+                      <p className="mt-1 text-sm leading-relaxed text-foreground/90">
+                        Los cajeros en Holbox suelen fallar. <strong>Lleva suficientes pesos mexicanos en efectivo desde Cancún 💵</strong>
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <Tip
                   icon={Bike}
                   title="Moverse por Holbox"
                   desc="No hay coches. Usar carrito de golf o bici 🚲. Si te alojas en Punta Mosquito, vas andando."
-                />
-                <Tip
-                  icon={Wallet}
-                  title="Efectivo"
-                  desc="Llevar pesos mexicanos 💵 — los cajeros suelen fallar."
                 />
                 <Tip
                   icon={Sun}

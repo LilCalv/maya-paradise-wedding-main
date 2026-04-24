@@ -1,22 +1,135 @@
 /**
  * Music & Party Section Component
- * Showcases the music playlist and party vibes for the wedding
+ * Showcases the Spotify playlists for guests to add their favorite songs
  */
 
-const playlistVideos = [
+import { Music4, Guitar, Drum, PartyPopper, Flame, Disc, Heart, Globe } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+type Playlist = {
+  id: string;
+  name: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  emoji: string;
+  url: string;
+  color: string;
+};
+
+const playlists: Playlist[] = [
   {
-    id: "video1",
-    youtubeId: "-nvnRcg2utc",
-    title: "Atardecer Místico",
-    description: "Para el atardecer y la ceremonia",
+    id: "mexicano",
+    name: "Holbox Mexicano",
+    title: "Mexicano",
+    description: "Mariachis, norteñas y rancheras",
+    icon: Drum,
+    emoji: "🎺",
+    url: "https://open.spotify.com/playlist/1GnIJ9RW89Ka3XHtMtQ5vw?si=ceaa055f47e24fb1&pt=f78dec2d354bcf8d5be4ba854f731001",
+    color: "from-red-500/20 to-green-500/20",
   },
   {
-    id: "video2",
-    youtubeId: "w52Ciwre1aE",
-    title: "Rituales de Unidad",
-    description: "La magia de Holbox",
+    id: "latino",
+    name: "Holbox Latino",
+    title: "Latino",
+    description: "Salsa, bachata y reggaetón",
+    icon: PartyPopper,
+    emoji: "💃",
+    url: "https://open.spotify.com/playlist/12yK3queCGyc63QF7Dh3Kj?si=d1261a53257f4995&pt=94de3b705e773f46fe1d125deb6cd500",
+    color: "from-orange-500/20 to-pink-500/20",
+  },
+  {
+    id: "trovador",
+    name: "Holbox Trovador",
+    title: "Trovador",
+    description: "Trova cubana y boleros",
+    icon: Guitar,
+    emoji: "🎸",
+    url: "https://open.spotify.com/playlist/2mZTn1DkFEb76V5nf4qNi4?si=eaf9e2aa7ff74bce&pt=d7d42383c6569418562f5dd5bf7da4e1",
+    color: "from-amber-500/20 to-yellow-500/20",
+  },
+  {
+    id: "sevilla",
+    name: "Holbox Sevilla",
+    title: "Sevilla",
+    description: "Sevillanas y copla española",
+    icon: Flame,
+    emoji: "💫",
+    url: "https://open.spotify.com/playlist/0WXxdio8oCMObUASF3hiWa?si=c2691f2d64fa44b5&pt=99af902917a2813d5773aada3e2ae210",
+    color: "from-rose-500/20 to-red-500/20",
+  },
+  {
+    id: "espanola",
+    name: "Holbox Española",
+    title: "Española",
+    description: "Pop y rock español",
+    icon: Music4,
+    emoji: "🎤",
+    url: "https://open.spotify.com/playlist/5MIVmGzOEX3XlzDCiGmSOt?si=7e57efcde23f4735&pt=ea37e15005fee84f35191ebd47186cf7",
+    color: "from-blue-500/20 to-purple-500/20",
+  },
+  {
+    id: "pachanga",
+    name: "Holbox Pachanga",
+    title: "Pachanga",
+    description: "Rumba, cumbia y son montuno",
+    icon: Disc,
+    emoji: "🪘",
+    url: "https://open.spotify.com/playlist/2xnEBxIbcmnWLnQCalUQpm?si=7b2a583fa8274af1&pt=bfeb09c94dcf79c4f43d26c28ec49fb8",
+    color: "from-yellow-500/20 to-orange-500/20",
+  },
+  {
+    id: "internacional",
+    name: "Holbox Internacional",
+    title: "Internacional",
+    description: "Hits 80s/90s que todos cantan",
+    icon: Globe,
+    emoji: "🌍",
+    url: "https://open.spotify.com/playlist/6Xyt452IzaHpVujRfXptVf?si=89799e509b5247de&pt=c7c728681ed54e735861999ebb913661",
+    color: "from-indigo-500/20 to-cyan-500/20",
   },
 ];
+
+function PlaylistCard({ playlist }: { playlist: Playlist }) {
+  const Icon = playlist.icon;
+
+  return (
+    <div className={`group relative overflow-hidden rounded-2xl border-2 border-gold/20 bg-gradient-to-br ${playlist.color} p-6 backdrop-blur-sm transition-all duration-300 hover:border-gold/60 hover:shadow-soft hover:-translate-y-1 hover-lift`}>
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 opacity-5 text-8xl pointer-events-none">
+        {playlist.emoji}
+      </div>
+
+      <div className="relative z-10">
+        {/* Icon */}
+        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gold/20 text-gold ring-1 ring-gold/30 transition-all group-hover:scale-110 group-hover:bg-gold/30">
+          <Icon className="h-7 w-7" strokeWidth={1.8} />
+        </div>
+
+        {/* Title */}
+        <h4 className="font-display text-2xl italic text-emerald-deep mb-2">
+          {playlist.title}
+        </h4>
+
+        {/* Description */}
+        <p className="text-sm text-foreground/75 mb-6">
+          {playlist.description}
+        </p>
+
+        {/* Button */}
+        <a
+          href={playlist.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full bg-emerald-deep px-5 py-2.5 text-sm font-medium text-cream transition-all hover:bg-gold hover:scale-105 hover:shadow-gold"
+        >
+          <Heart className="h-4 w-4" />
+          Añadir Canción
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export function Music() {
   return (
@@ -28,162 +141,39 @@ export function Music() {
       }}
     >
       {/* Main heading */}
-      <div className="reveal mb-12 max-w-2xl">
+      <div className="reveal mb-8 max-w-3xl">
         <p className="mb-4 text-xs uppercase tracking-[0.4em] text-emerald-deep/70">
-          La Fiesta
+          La Banda Sonora
         </p>
         <h2 className="font-display text-5xl italic leading-tight text-emerald-deep sm:text-6xl md:text-7xl">
-          🔥 Resiste sentado…
-          <br />
-          <span className="text-gold">si puedes</span>
+          🎵 ¡Todos Hacemos la Música!
         </h2>
+        <p className="mt-6 font-display text-xl italic text-emerald-deep/90 md:text-2xl">
+          Agreguen sus canciones favoritas
+        </p>
       </div>
 
-      {/* Intro text */}
+      {/* Subtitle */}
       <div className="reveal reveal-delay-1 mb-12 max-w-2xl">
-        <p className="font-display text-xl italic text-emerald-deep/90 md:text-2xl">
-          Vuestra presencia es el mejor regalo… 🎁
-        </p>
-        <p className="mt-4 text-sm uppercase tracking-[0.3em] text-emerald-deep/75">
-          Pero si queréis ayudar a que suene:
+        <p className="text-base text-foreground/80 leading-relaxed">
+          Tenemos playlists para todos los gustos. ¡Elige tu estilo y añade esas canciones que no pueden faltar! 🎶
         </p>
       </div>
 
-      {/* Music playlist grid */}
-      <div className="reveal reveal-delay-2 grid w-full max-w-3xl grid-cols-1 gap-6 md:grid-cols-2">
-        {/* Salsa */}
-        <div className="group rounded-2xl border-2 border-gold/20 bg-cream/50 p-8 backdrop-blur-sm transition-all hover:border-gold/50 hover:shadow-soft">
-          <p className="text-4xl">💃</p>
-          <h3 className="mt-3 font-display text-lg italic text-gold">Salsa</h3>
-          <p className="mt-2 text-sm text-emerald-deep/75">
-            Que no perdona caderas
-          </p>
-        </div>
-
-        {/* Mariachi */}
-        <div className="group rounded-2xl border-2 border-gold/20 bg-cream/50 p-8 backdrop-blur-sm transition-all hover:border-gold/50 hover:shadow-soft">
-          <p className="text-4xl">🎺</p>
-          <h3 className="mt-3 font-display text-lg italic text-gold">Mariachi</h3>
-          <p className="mt-2 text-sm text-emerald-deep/75">
-            Para gritar con alegría
-          </p>
-        </div>
-
-        {/* 80s/90s Hits */}
-        <div className="group rounded-2xl border-2 border-gold/20 bg-cream/50 p-8 backdrop-blur-sm transition-all hover:border-gold/50 hover:shadow-soft">
-          <p className="text-4xl">🎸</p>
-          <h3 className="mt-3 font-display text-lg italic text-gold">Hits 80/90</h3>
-          <p className="mt-2 text-sm text-emerald-deep/75">
-            Que salen solos
-          </p>
-        </div>
-
-        {/* Flamenco & Sevillanas */}
-        <div className="group rounded-2xl border-2 border-gold/20 bg-cream/50 p-8 backdrop-blur-sm transition-all hover:border-gold/50 hover:shadow-soft">
-          <p className="text-4xl">👣</p>
-          <h3 className="mt-3 font-display text-lg italic text-gold">Flamenco</h3>
-          <p className="mt-2 text-sm text-emerald-deep/75">
-            Que levantan hasta al más serio
-          </p>
-        </div>
-      </div>
-
-      {/* Sintonía de la Boda Section */}
-      <div className="reveal reveal-delay-3 mt-24 w-full">
-        <div className="mx-auto max-w-5xl px-6">
-          <div className="text-center mb-12">
-            <p className="mb-2 text-xs uppercase tracking-[0.45em] text-gold">
-              Atmosphere
-            </p>
-            <h3 className="font-display text-4xl italic text-emerald-deep md:text-5xl">
-              ✨ Sintonía de la Boda
-            </h3>
-            <p className="mt-4 text-sm text-emerald-deep/75">
-              La música que define el alma de nuestra celebración
-            </p>
+      {/* Playlists Grid */}
+      <div className="reveal reveal-delay-2 grid w-full max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {playlists.map((playlist, index) => (
+          <div key={playlist.id} className={`reveal-delay-${Math.min(index + 2, 5)}`}>
+            <PlaylistCard playlist={playlist} />
           </div>
-
-          {/* YouTube Videos Grid */}
-          <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-            {playlistVideos.map((video) => (
-              <div
-                key={video.id}
-                className="group flex flex-col overflow-hidden rounded-2xl border-2 border-gold/30 bg-cream/60 backdrop-blur-sm transition-all duration-300 hover:border-gold/60 hover:shadow-gold hover:-translate-y-1"
-              >
-                {/* YouTube Embed */}
-                <div className="relative aspect-video overflow-hidden bg-emerald-deep/10">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${video.youtubeId}`}
-                    title={video.title}
-                    className="h-full w-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-
-                {/* Card Content */}
-                <div className="flex flex-col justify-between flex-1 p-5">
-                  <div>
-                    <h4 className="font-display text-lg italic text-gold">
-                      {video.title}
-                    </h4>
-                    <p className="mt-2 text-xs uppercase tracking-[0.2em] text-emerald-deep/70">
-                      {video.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* Promise section */}
-      <div className="reveal reveal-delay-3 mt-16 max-w-2xl rounded-2xl border-2 border-gold/30 bg-gradient-to-br from-gold/5 to-emerald-deep/5 p-8 md:p-10">
-        <p className="font-display text-lg italic text-emerald-deep md:text-xl">
-          Prometemos:
+      {/* Footer note */}
+      <div className="reveal reveal-delay-3 mt-16 max-w-2xl">
+        <p className="text-sm italic text-foreground/60">
+          💡 Tip: No te cortes, ¡cuantos más hits añadamos, mejor será la fiesta!
         </p>
-        <p className="mt-4 text-base leading-relaxed text-emerald-deep/85">
-          Levantar de la silla hasta al más tímido… y que quien diga{" "}
-          <span className="italic">"yo no canto"</span> acabe a gritos
-          <span className="ml-1 text-xl">🎤😏</span>
-        </p>
-      </div>
-
-      {/* Dresscode section */}
-      <div className="reveal reveal-delay-3 mt-10 max-w-2xl rounded-2xl border-2 border-terracota/40 bg-gradient-to-br from-terracota/8 to-transparent p-8 md:p-10">
-        <p className="text-sm uppercase tracking-[0.35em] text-terracota mb-4">
-          👔 Dresscode
-        </p>
-        <div className="space-y-3 text-sm leading-relaxed text-emerald-deep">
-          <p>
-            <span className="font-semibold text-terracota">Hombres:</span> Guayaberas — elegancia tropical
-          </p>
-          <p>
-            <span className="font-semibold text-terracota">Mujeres:</span> Vestido suelto — comodidad y movimiento
-          </p>
-          <p className="mt-4 font-display text-base italic text-emerald-deep/90">
-            ¡El calzado se va a perder en la pista de baile! 👟✨
-          </p>
-        </div>
-      </div>
-
-      {/* Final warning */}
-      <div className="reveal reveal-delay-3 mt-10 max-w-xl">
-        <p className="text-sm uppercase tracking-[0.35em] text-gold">
-          ⚠️ Advertencia:
-        </p>
-        <p className="mt-4 font-display text-lg italic text-emerald-deep/90">
-          El que no se mueva o cante…
-          <br />
-          <span className="text-gold">paga los tacos de la resaca!!</span>
-          <span className="ml-1">🌮😈</span>
-        </p>
-      </div>
-
-      {/* Decorative divider */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-gold/30">
-        <div className="h-20 w-px bg-gradient-to-b from-gold/30 to-transparent" />
       </div>
     </section>
   );
