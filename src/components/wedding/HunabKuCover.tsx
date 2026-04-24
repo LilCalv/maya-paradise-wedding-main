@@ -31,16 +31,12 @@ export function HunabKuCover() {
         @keyframes logoReveal {
           0% {
             opacity: 0;
-            transform: scale(0.7) rotate(-10deg);
-            filter: blur(10px);
-          }
-          60% {
-            opacity: 0.8;
-            transform: scale(1.05) rotate(2deg);
+            transform: scale(0.8);
+            filter: blur(8px);
           }
           100% {
             opacity: 1;
-            transform: scale(1) rotate(0deg);
+            transform: scale(1);
             filter: blur(0px);
           }
         }
@@ -59,8 +55,8 @@ export function HunabKuCover() {
           animation: spin-slow 45s linear infinite;
         }
         .hunab-ku-image.revealed {
-          animation: logoReveal 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, 
-                     spin-slow 45s linear infinite 1.8s;
+          animation: logoReveal 2s cubic-bezier(0.22, 1, 0.36, 1) forwards, 
+                     spin-slow 45s linear infinite 2s;
         }
         .shimmer-overlay {
           position: absolute;

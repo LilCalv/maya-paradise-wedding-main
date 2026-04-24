@@ -15,7 +15,7 @@ function HotelCard({
   contact?: string;
 }) {
   return (
-    <div className="group rounded-xl border border-border bg-card p-6 transition-all hover:border-gold/60 hover:shadow-soft hover-lift">
+    <div className="group rounded-xl border border-border bg-card p-6 transition-all hover:border-gold/60 hover:shadow-soft hover-lift glass-card">
       {badge && (
         <span className="mb-3 inline-block rounded-full bg-emerald-deep px-3 py-1 text-[0.6rem] uppercase tracking-[0.3em] text-cream">
           {badge}

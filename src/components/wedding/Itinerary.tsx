@@ -98,12 +98,6 @@ export function Itinerary() {
             Nuestra Aventura Juntos
           </h2>
           <div className="ornament-divider mt-8 mx-auto max-w-sm" />
-          <p className="mx-auto mt-8 max-w-xl rounded-full border border-gold/40 bg-cream-warm px-6 py-3 text-xs uppercase tracking-[0.3em] text-emerald-deep">
-            Dress Code · Tropical Chic
-            <span className="block mt-1 text-[0.65rem] tracking-[0.2em] text-emerald-deep/70 normal-case">
-              Toque blanco para la ceremonia ✨
-            </span>
-          </p>
         </div>
 
         <div className="mt-20 space-y-24">

@@ -8,7 +8,7 @@ const generatePhotoArray = () => {
   // Extensiones en orden de prioridad
   const extensions = ['jpeg', 'jpg', 'png', 'webp'];
   
-  return Array.from({ length: 50 }, (_, i) => {
+  const allPhotos = Array.from({ length: 50 }, (_, i) => {
     const photoNum = i + 1;
     // Foto 4-7 tienen .jpg, resto tienen .jpeg
     const ext = [4, 5, 6, 7].includes(photoNum) ? 'jpg' : 'jpeg';
@@ -17,8 +17,25 @@ const generatePhotoArray = () => {
       id: photoNum,
       src: `/fotos/foto${photoNum}.${ext}`,
       alt: `Momento ${photoNum} de la boda`,
+      // Categorizar: fotos 1-15 y números impares = pareja/íntimas
+      // Resto = grupo/celebración
+      category: (photoNum <= 15 || photoNum % 2 !== 0) ? 'couple' : 'group',
     };
   });
+
+  // Intercalar: pareja, grupo, pareja, grupo...
+  const couplePhotos = allPhotos.filter(p => p.category === 'couple');
+  const groupPhotos = allPhotos.filter(p => p.category === 'group');
+  
+  const intercalated = [];
+  const maxLength = Math.max(couplePhotos.length, groupPhotos.length);
+  
+  for (let i = 0; i < maxLength; i++) {
+    if (couplePhotos[i]) intercalated.push(couplePhotos[i]);
+    if (groupPhotos[i]) intercalated.push(groupPhotos[i]);
+  }
+  
+  return intercalated;
 };
 
 // Frases místicas para descripciones

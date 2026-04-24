@@ -94,7 +94,7 @@ function PlaylistCard({ playlist }: { playlist: Playlist }) {
   const Icon = playlist.icon;
 
   return (
-    <div className={`group relative overflow-hidden rounded-2xl border-2 border-gold/20 bg-gradient-to-br ${playlist.color} p-6 backdrop-blur-sm transition-all duration-300 hover:border-gold/60 hover:shadow-soft hover:-translate-y-1 hover-lift`}>
+    <div className={`group relative overflow-hidden rounded-2xl border-2 border-gold/20 bg-gradient-to-br ${playlist.color} p-6 backdrop-blur-sm transition-all duration-300 hover:border-gold/60 hover:shadow-soft hover:-translate-y-1 hover-lift glass-card`}>
       {/* Background decoration */}
       <div className="absolute top-0 right-0 opacity-5 text-8xl pointer-events-none">
         {playlist.emoji}
