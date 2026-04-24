@@ -3,12 +3,12 @@
 import { useState, useCallback } from "react";
 import { X } from "lucide-react";
 
-// Generar automáticamente array de 50 fotos con fallback de extensiones
+// Generar automáticamente array de 76 fotos con fallback de extensiones
 const generatePhotoArray = () => {
   // Extensiones en orden de prioridad
   const extensions = ['jpeg', 'jpg', 'png', 'webp'];
   
-  const allPhotos = Array.from({ length: 50 }, (_, i) => {
+  const allPhotos = Array.from({ length: 76 }, (_, i) => {
     const photoNum = i + 1;
     // Foto 4-7 tienen .jpg, resto tienen .jpeg
     const ext = [4, 5, 6, 7].includes(photoNum) ? 'jpg' : 'jpeg';
