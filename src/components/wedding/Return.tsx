@@ -95,41 +95,6 @@ export function Return() {
           </p>
         </div>
 
-        {/* Flight Options */}
-        <div className="reveal reveal-delay-2 mt-12">
-          <div className="mb-8 flex items-center gap-3">
-            <Plane className="h-6 w-6 text-gold" />
-            <h3 className="font-display text-2xl italic text-emerald-deep">
-              Opción Recomendada
-            </h3>
-          </div>
-          <p className="mb-4 text-sm text-emerald-deep/80">
-            👉 <span className="font-medium">Opción recomendada (para ir juntos)</span>
-          </p>
-          
-          <FlightCard
-            airline="Air Europa · Vuelo directo"
-            dates="Martes 1 ó Jueves 3 diciembre"
-            departure="15:20 h desde Madrid"
-            arrival="20:25 h a Cancún"
-            duration="~11 horas"
-            notes="Este es el vuelo en el que organizamos transporte privado incluido hasta Chiquilá"
-          />
-        </div>
-
-        {/* Important Info */}
-        <div className="reveal reveal-delay-2 mt-8 rounded-xl bg-amber-50/50 p-6 ring-1 ring-amber-100">
-          <div className="flex gap-3">
-            <AlertCircle className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" />
-            <div>
-              <h4 className="font-display text-lg italic text-amber-900">Importante</h4>
-              <p className="mt-2 text-sm leading-relaxed text-amber-900/85">
-                Al llegar por la noche, se recomienda dormir en Chiquilá, ya que el último ferry sale sobre las 21:30 h.
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Chiquilá Lodging */}
         <div className="reveal reveal-delay-3 mt-12">
           <div className="mb-6 flex items-center gap-3">
