@@ -1,0 +1,382 @@
+/* Fonts: Playfair Display (serif elegante) + Montserrat (sans limpia) */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-emerald-deep: var(--emerald-deep);
+  --color-emerald-soft: var(--emerald-soft);
+  --color-cream: var(--cream);
+  --color-cream-warm: var(--cream-warm);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Holbox Paradise Palette */
+  --emerald-deep: #1A3C34;  /* Verde Selva Profundo */
+  --emerald-soft: oklch(0.46 0.08 160);
+  --cream: #F5F0E1;  /* Arena de Holbox */
+  --cream-warm: #EAE0CE;
+  --gold: #9C7C38;  /* Oro Viejo / Bronce Martillado */
+  --gold-soft: #B89C5C;
+  --terracota: #B35C44;  /* Tierra de Fuego */
+
+  --background: var(--cream);
+  --foreground: oklch(0.22 0.04 160);
+
+  --card: oklch(0.99 0.01 85);
+  --card-foreground: oklch(0.22 0.04 160);
+
+  --popover: oklch(0.99 0.01 85);
+  --popover-foreground: oklch(0.22 0.04 160);
+
+  --primary: var(--emerald-deep);
+  --primary-foreground: var(--cream);
+
+  --secondary: var(--cream-warm);
+  --secondary-foreground: var(--emerald-deep);
+
+  --muted: oklch(0.92 0.02 80);
+  --muted-foreground: oklch(0.42 0.04 160);
+
+  --accent: var(--gold);
+  --accent-foreground: oklch(0.22 0.04 160);
+
+  --destructive: oklch(0.55 0.2 27);
+  --destructive-foreground: var(--cream);
+
+  --border: oklch(0.86 0.03 80);
+  --input: oklch(0.88 0.025 80);
+  --ring: var(--gold);
+
+  --shadow-soft: 0 10px 40px -12px color-mix(in oklab, var(--emerald-deep) 22%, transparent);
+  --shadow-gold: 0 8px 30px -10px color-mix(in oklab, var(--gold) 35%, transparent);
+
+  --gradient-emerald: linear-gradient(135deg, var(--emerald-deep), var(--emerald-soft));
+  --gradient-gold: linear-gradient(135deg, var(--gold), var(--gold-soft));
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    position: relative;
+  }
+
+  /* Global film grain effect */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: 
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" result="noise" seed="2" /><feColorMatrix in="noise" type="saturate" values="0" /></filter><rect width="100%" height="100%" filter="url(%23noise)" /></svg>');
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .text-emerald-deep { color: var(--emerald-deep); }
+  .text-gold { color: var(--gold); }
+  .bg-emerald-deep { background-color: var(--emerald-deep); }
+  .bg-cream { background-color: var(--cream); }
+  .bg-cream-warm { background-color: var(--cream-warm); }
+  .bg-gold { background-color: var(--gold); }
+  .border-gold { border-color: var(--gold); }
+  .border-emerald-deep { border-color: var(--emerald-deep); }
+
+  .gradient-emerald { background-image: var(--gradient-emerald); }
+  .gradient-gold { background-image: var(--gradient-gold); }
+
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-gold { box-shadow: var(--shadow-gold); }
+
+  /* Warm filter for gallery images - Caribbean sunset tone */
+  .filter-warm {
+    filter: sepia(0.15) saturate(1.1) hue-rotate(8deg) brightness(1.05) contrast(1.02);
+  }
+
+  /* Reveal-on-scroll utility (driven by IntersectionObserver in useReveal) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 120ms; }
+  .reveal-delay-2 { transition-delay: 240ms; }
+  .reveal-delay-3 { transition-delay: 360ms; }
+
+  .ornament-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--gold);
+  }
+  .ornament-divider::before,
+  .ornament-divider::after {
+    content: "";
+    height: 2px;
+    width: clamp(40px, 12vw, 120px);
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--gold) 15%,
+      var(--gold) 85%,
+      transparent 100%
+    );
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Subtle linen/aged paper texture overlay */
+  .paper-grain {
+    position: relative;
+  }
+  .paper-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.25;
+    mix-blend-mode: overlay;
+    background-image: 
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(139, 90, 43, 0.03) 2px,
+        rgba(139, 90, 43, 0.03) 4px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(139, 90, 43, 0.03) 2px,
+        rgba(139, 90, 43, 0.03) 4px
+      );
+    background-size: 100% 100%;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   HUNAB KU — BACKGROUND PULSING AURA SYSTEM
+   ═══════════════════════════════════════════════ */
+
+@keyframes hunab-pulse-1 {
+  0%, 100% { transform: scale(1);    opacity: 0.13; }
+  50%       { transform: scale(1.18); opacity: 0.04; }
+}
+@keyframes hunab-pulse-2 {
+  0%, 100% { transform: scale(1);    opacity: 0.10; }
+  50%       { transform: scale(1.28); opacity: 0.02; }
+}
+@keyframes hunab-pulse-3 {
+  0%, 100% { transform: scale(1);    opacity: 0.18; }
+  50%       { transform: scale(1.08); opacity: 0.07; }
+}
+@keyframes hunab-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes hunab-shimmer {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 14px color-mix(in oklab, var(--gold) 55%, transparent))
+      drop-shadow(0 0 40px color-mix(in oklab, var(--gold) 20%, transparent));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 28px color-mix(in oklab, var(--gold) 85%, transparent))
+      drop-shadow(0 0 70px color-mix(in oklab, var(--gold) 40%, transparent))
+      drop-shadow(0 0 110px color-mix(in oklab, var(--emerald-deep) 30%, transparent));
+  }
+}
+
+/* Wrapper — centred, full-bleed, behind content */
+.hunab-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Common aura ring */
+.hunab-aura {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform, opacity;
+}
+
+/* Ring 1 — outermost, gold aura with enhanced drop-shadow effect */
+.hunab-aura-1 {
+  width:  min(92vmin, 820px);
+  height: min(92vmin, 820px);
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, #D4AF37 35%, transparent) 0%,
+    color-mix(in oklab, #D4AF37 18%, transparent) 45%,
+    transparent 70%
+  );
+  animation: hunab-pulse-1 7s ease-in-out infinite;
+  filter: drop-shadow(0 0 40px color-mix(in oklab, #D4AF37 60%, transparent));
+}
+/* Ring 2 — emerald mid */
+.hunab-aura-2 {
+  width:  min(70vmin, 620px);
+  height: min(70vmin, 620px);
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--emerald-deep) 18%, transparent) 0%,
+    color-mix(in oklab, var(--emerald-soft) 10%, transparent) 40%,
+    transparent 68%
+  );
+  animation: hunab-pulse-2 9s ease-in-out infinite 1.5s;
+}
+/* Ring 3 — warm cream inner */
+.hunab-aura-3 {
+  width:  min(52vmin, 460px);
+  height: min(52vmin, 460px);
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--gold-soft) 30%, transparent) 0%,
+    color-mix(in oklab, var(--cream-warm) 12%, transparent) 35%,
+    transparent 60%
+  );
+  animation: hunab-pulse-3 5.5s ease-in-out infinite 0.8s;
+}
+
+/* Background Hunab Ku symbol */
+.hunab-bg-symbol {
+  position: absolute;
+  width:  min(58vmin, 510px);
+  height: min(58vmin, 510px);
+  object-fit: contain;
+  opacity: 0.065;
+  mix-blend-mode: multiply;
+  animation:
+    hunab-spin    120s linear      infinite,
+    hunab-shimmer   8s ease-in-out infinite alternate;
+  will-change: transform, filter, opacity;
+}
+
+/* Foreground (small) symbol shimmer upgrade */
+.hunab-fg-symbol {
+  animation: hunab-shimmer 6s ease-in-out infinite alternate;
+}
+
+/* ═══════════════════════════════════════════════
+   LIQUID WAVE SECTION DIVIDERS
+   ═══════════════════════════════════════════════ */
+
+@keyframes liquid-flow-1 {
+  0%   { d: path("M0,40 C180,0  420,80 640,38 C860,0  1100,70 1280,40 L1280,80 L0,80 Z"); }
+  33%  { d: path("M0,38 C160,75 380,10 640,50 C900,85 1060,15 1280,42 L1280,80 L0,80 Z"); }
+  66%  { d: path("M0,45 C220,85 480,5  640,44 C800,78 1040,8  1280,36 L1280,80 L0,80 Z"); }
+  100% { d: path("M0,40 C180,0  420,80 640,38 C860,0  1100,70 1280,40 L1280,80 L0,80 Z"); }
+}
+@keyframes liquid-flow-2 {
+  0%   { d: path("M0,48 C200,8  440,72 640,32 C840,0  1080,68 1280,44 L1280,80 L0,80 Z"); }
+  50%  { d: path("M0,36 C240,80 400,16 640,52 C880,84 1040,20 1280,38 L1280,80 L0,80 Z"); }
+  100% { d: path("M0,48 C200,8  440,72 640,32 C840,0  1080,68 1280,44 L1280,80 L0,80 Z"); }
+}
+
+.liquid-divider {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  margin-bottom: -1px;
+}
+.liquid-divider svg {
+  display: block;
+  width: 100%;
+  height: clamp(48px, 5.5vw, 80px);
+}
+.liquid-divider path.wave-back {
+  animation: liquid-flow-2 15s ease-in-out infinite;
+  opacity: 0.5;
+}
+.liquid-divider path.wave-front {
+  animation: liquid-flow-1 11s ease-in-out infinite 0.6s;
+}
+/* Flip variant — flips the wave upside down */
+.liquid-divider.flip {
+  transform: rotate(180deg);
+  margin-top: -1px;
+  margin-bottom: 0;
+}
