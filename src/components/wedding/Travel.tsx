@@ -111,10 +111,8 @@ export function Travel() {
     <section
       id="travel"
       ref={sectionRef}
-      className="relative px-6"
+      className="relative px-6 bg-transparent"
       style={{
-        backgroundImage:
-          "linear-gradient(180deg, var(--cream-warm), var(--cream))",
         // Tall section so the scroll-driven animation has room
         minHeight: "320vh",
       }}

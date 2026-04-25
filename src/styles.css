@@ -172,19 +172,42 @@
     box-shadow: 0 12px 40px 0 rgba(26, 60, 52, 0.12);
   }
 
-  /* Button hover effects */
-  button, .btn, a[class*="btn"] {
+  /* Button hover effects - Premium Micro-interactions */
+  button, .btn, a[class*="btn"], a[class*="bg-emerald-deep"], a[class*="bg-gold"] {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
   }
 
-  button:hover, .btn:hover, a[class*="btn"]:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1);
-    box-shadow: 0 8px 24px rgba(156, 124, 56, 0.3);
+  button:hover, .btn:hover, a[class*="btn"]:hover, a[class*="bg-emerald-deep"]:hover, a[class*="bg-gold"]:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: brightness(1.15);
+    box-shadow: 0 12px 32px rgba(156, 124, 56, 0.35);
+    letter-spacing: 0.02em;
   }
 
-  button:active, .btn:active, a[class*="btn"]:active {
-    transform: translateY(0);
+  button:active, .btn:active, a[class*="btn"]:active, a[class*="bg-emerald-deep"]:active, a[class*="bg-gold"]:active {
+    transform: translateY(0) scale(0.98);
+    transition: all 0.1s ease;
+  }
+
+  /* Shimmer effect on hover */
+  button::after, .btn::after, a[class*="btn"]::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  button:hover::after, .btn:hover::after, a[class*="btn"]:hover::after {
+    width: 300px;
+    height: 300px;
   }
 
   /* Background transition on scroll */
@@ -225,8 +248,12 @@
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
     font-weight: 500;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.015em;
   }
+
+  h1 { letter-spacing: 0.02em; }
+  h2 { letter-spacing: 0.015em; }
+  h3 { letter-spacing: 0.01em; }
 }
 
 @layer utilities {

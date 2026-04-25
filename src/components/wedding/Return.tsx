@@ -71,8 +71,7 @@ export function Return() {
   return (
     <section
       id="regreso"
-      className="relative px-6 py-28 md:py-36"
-      style={{ backgroundColor: "var(--cream)" }}
+      className="relative px-6 py-28 md:py-36 bg-transparent"
     >
       <div className="mx-auto max-w-6xl">
         {/* Header */}
@@ -84,38 +83,21 @@ export function Return() {
           <div className="ornament-divider mt-8 mx-auto max-w-sm" />
         </div>
 
-        {/* Recommendation */}
-        <div className="reveal reveal-delay-1 mt-12 rounded-2xl border-2 border-gold/30 bg-gradient-to-br from-gold/5 to-emerald-deep/5 p-8 md:p-10">
-          <h3 className="mb-2 font-display text-2xl italic text-emerald-deep md:text-3xl">
-            Recomendamos volver el:
-          </h3>
-          <p className="text-lg font-medium text-gold">📅 Martes 8 de diciembre</p>
-          <p className="mt-4 text-sm leading-relaxed text-emerald-deep/85">
-            Los vuelos desde Cancún salen por la noche, así que hay tiempo de sobra para hacer el trayecto desde Holbox ese mismo día sin prisas.
-          </p>
-        </div>
-
-        {/* Chiquilá Lodging */}
-        <div className="reveal reveal-delay-3 mt-12">
-          <div className="mb-6 flex items-center gap-3">
-            <Bed className="h-5 w-5 text-gold" />
-            <h3 className="font-display text-2xl italic text-emerald-deep">
-              Alojamiento en Chiquilá (1 noche)
-            </h3>
-          </div>
-          <div className="rounded-xl border border-border bg-card p-6">
-            <p className="leading-relaxed text-foreground/85">
-              Para los que lleguéis por la noche a Cancún, recomendamos hacer noche en Chiquilá antes de cruzar a Holbox al día siguiente.
-            </p>
-          </div>
-        </div>
-
         {/* Tips */}
-        <div className="reveal reveal-delay-3 mt-12 space-y-3">
+        <div className="reveal reveal-delay-1 mt-12 space-y-3">
           <div className="mb-4">
             <h3 className="font-display text-lg italic text-emerald-deep">
               💡 Consejos para el regreso:
             </h3>
+          </div>
+          <div className="reveal rounded-2xl border-2 border-gold/30 bg-gradient-to-br from-gold/5 to-emerald-deep/5 p-6">
+            <h4 className="mb-2 font-display text-xl italic text-emerald-deep">
+              Recomendamos volver el:
+            </h4>
+            <p className="text-lg font-medium text-gold">📅 Martes 8 de diciembre</p>
+            <p className="mt-3 text-sm leading-relaxed text-emerald-deep/85">
+              Los vuelos desde Cancún salen por la noche, así que hay tiempo de sobra para hacer el trayecto desde Holbox ese mismo día sin prisas.
+            </p>
           </div>
           <Tip
             icon={Clock}
@@ -126,11 +108,6 @@ export function Return() {
             icon={Bus}
             title="Transporte Incluido"
             desc="Si vuelas con Air Europa, llevan transporte privado incluido desde Cancún a Chiquilá"
-          />
-          <Tip
-            icon={Bed}
-            title="Descanso Recomendado"
-            desc="Hacer noche en Chiquilá para no madrugar tras la fiesta"
           />
         </div>
       </div>

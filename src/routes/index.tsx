@@ -4,6 +4,7 @@ import { HunabKuCover } from "@/components/wedding/HunabKuCover";
 import { InLakesh } from "@/components/wedding/InLakesh";
 import { Venue } from "@/components/wedding/Venue";
 import { Itinerary } from "@/components/wedding/Itinerary";
+import { Dresscode } from "@/components/wedding/Dresscode";
 import { Return } from "@/components/wedding/Return";
 import { Travel } from "@/components/wedding/Travel";
 import { Lodging } from "@/components/wedding/Lodging";
@@ -74,7 +75,7 @@ function LiquidDivider({
 function Index() {
   useReveal();
   return (
-    <main className="min-h-screen bg-cream text-foreground">
+    <main className="min-h-screen bg-transparent text-foreground">
       <FloatingElements />
       <Hero />
       <LiquidDivider fromColor="var(--cream)" toColor="var(--cream)" />
@@ -86,11 +87,13 @@ function Index() {
       <LiquidDivider fromColor="oklch(0.96 0.02 160)" toColor="var(--cream)" flip />
       <Itinerary />
       <LiquidDivider fromColor="var(--cream)" toColor="var(--cream)" />
-      <Return />
+      <Dresscode />
       <LiquidDivider fromColor="var(--cream)" toColor="oklch(0.34 0.07 160)" />
       <Travel />
       <LiquidDivider fromColor="oklch(0.34 0.07 160)" toColor="var(--cream)" flip />
       <Lodging />
+      <LiquidDivider fromColor="var(--cream)" toColor="var(--cream)" />
+      <Return />
       <LiquidDivider fromColor="var(--cream)" toColor="oklch(0.96 0.02 160)" />
       <Music />
       <LiquidDivider fromColor="oklch(0.96 0.02 160)" toColor="var(--cream)" flip />

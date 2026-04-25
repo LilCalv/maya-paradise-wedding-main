@@ -3,6 +3,7 @@
  * Showcases the Spotify playlists for guests to add their favorite songs
  */
 
+import { motion } from "framer-motion";
 import { Music4, Guitar, Drum, PartyPopper, Flame, Disc, Heart, Globe } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -90,44 +91,77 @@ const playlists: Playlist[] = [
   },
 ];
 
-function PlaylistCard({ playlist }: { playlist: Playlist }) {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+function PlaylistCard({ playlist, index }: { playlist: Playlist; index: number }) {
   const Icon = playlist.icon;
 
   return (
-    <div className={`group relative overflow-hidden rounded-2xl border-2 border-gold/20 bg-gradient-to-br ${playlist.color} p-6 backdrop-blur-sm transition-all duration-300 hover:border-gold/60 hover:shadow-soft hover:-translate-y-1 hover-lift glass-card`}>
+    <motion.div
+      variants={cardVariants}
+      className={`group relative overflow-hidden rounded-2xl border-2 border-gold/20 bg-gradient-to-br ${playlist.color} p-6 backdrop-blur-sm transition-all duration-300 hover:border-gold/60 hover:shadow-[0_8px_30px_rgb(212,175,55,0.15)] hover:-translate-y-2 glass-card md:p-8`}
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    >
       {/* Background decoration */}
-      <div className="absolute top-0 right-0 opacity-5 text-8xl pointer-events-none">
+      <div className="absolute -top-2 -right-2 opacity-5 text-9xl pointer-events-none transition-all duration-500 group-hover:scale-110 group-hover:opacity-10">
         {playlist.emoji}
       </div>
 
       <div className="relative z-10">
         {/* Icon */}
-        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gold/20 text-gold ring-1 ring-gold/30 transition-all group-hover:scale-110 group-hover:bg-gold/30">
-          <Icon className="h-7 w-7" strokeWidth={1.8} />
-        </div>
+        <motion.div 
+          className="mb-5 flex h-16 w-16 items-center justify-center rounded-xl bg-gold/20 text-gold ring-1 ring-gold/30"
+          whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Icon className="h-8 w-8" strokeWidth={1.8} />
+        </motion.div>
 
         {/* Title */}
-        <h4 className="font-display text-2xl italic text-emerald-deep mb-2">
+        <h4 className="font-display text-2xl italic text-emerald-deep mb-3 md:text-3xl" style={{ letterSpacing: "0.02em" }}>
           {playlist.title}
         </h4>
 
         {/* Description */}
-        <p className="text-sm text-foreground/75 mb-6">
+        <p className="text-sm text-foreground/75 mb-6 leading-relaxed">
           {playlist.description}
         </p>
 
         {/* Button */}
-        <a
+        <motion.a
           href={playlist.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-emerald-deep px-5 py-2.5 text-sm font-medium text-cream transition-all hover:bg-gold hover:scale-105 hover:shadow-gold"
+          className="inline-flex items-center gap-2 rounded-full bg-emerald-deep px-6 py-3 text-sm font-medium text-cream transition-all hover:bg-gold"
+          whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(212, 175, 55, 0.3)" }}
+          whileTap={{ scale: 0.98 }}
         >
           <Heart className="h-4 w-4" />
           Añadir Canción
-        </a>
+        </motion.a>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -135,45 +169,66 @@ export function Music() {
   return (
     <section
       id="musica"
-      className="relative isolate flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 text-center paper-grain"
-      style={{
-        background: "linear-gradient(135deg, oklch(0.96 0.02 160) 0%, var(--cream) 100%)",
-      }}
+      className="relative isolate px-6 py-28 text-center md:py-36"
     >
-      {/* Main heading */}
-      <div className="reveal mb-8 max-w-3xl">
-        <p className="mb-4 text-xs uppercase tracking-[0.4em] text-emerald-deep/70">
-          La Banda Sonora
-        </p>
-        <h2 className="font-display text-5xl italic leading-tight text-emerald-deep sm:text-6xl md:text-7xl">
-          🎵 ¡Todos Hacemos la Música!
-        </h2>
-        <p className="mt-6 font-display text-xl italic text-emerald-deep/90 md:text-2xl">
-          Agreguen sus canciones favoritas
-        </p>
-      </div>
+      <div className="mx-auto max-w-7xl">
+        {/* Main heading */}
+        <motion.div 
+          className="reveal mb-12 max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <p className="mb-4 text-xs uppercase tracking-[0.4em] text-emerald-deep/70">
+            La Banda Sonora
+          </p>
+          <h2 className="font-display text-5xl italic leading-tight text-emerald-deep sm:text-6xl md:text-7xl" style={{ letterSpacing: "0.01em" }}>
+            🎵 ¡Todos Hacemos la Música!
+          </h2>
+          <p className="mt-6 font-display text-xl italic text-emerald-deep/90 md:text-2xl">
+            Agreguen sus canciones favoritas
+          </p>
+        </motion.div>
 
-      {/* Subtitle */}
-      <div className="reveal reveal-delay-1 mb-12 max-w-2xl">
-        <p className="text-base text-foreground/80 leading-relaxed">
-          Tenemos playlists para todos los gustos. ¡Elige tu estilo y añade esas canciones que no pueden faltar! 🎶
-        </p>
-      </div>
+        {/* Subtitle */}
+        <motion.div 
+          className="reveal reveal-delay-1 mb-12 max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <p className="text-base text-foreground/80 leading-relaxed">
+            Tenemos playlists para todos los gustos. ¡Elige tu estilo y añade esas canciones que no pueden faltar! 🎶
+          </p>
+        </motion.div>
 
-      {/* Playlists Grid */}
-      <div className="reveal reveal-delay-2 grid w-full max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {playlists.map((playlist, index) => (
-          <div key={playlist.id} className={`reveal-delay-${Math.min(index + 2, 5)}`}>
-            <PlaylistCard playlist={playlist} />
-          </div>
-        ))}
-      </div>
+        {/* Playlists Grid */}
+        <motion.div 
+          className="grid w-full max-w-7xl mx-auto grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {playlists.map((playlist, index) => (
+            <PlaylistCard key={playlist.id} playlist={playlist} index={index} />
+          ))}
+        </motion.div>
 
-      {/* Footer note */}
-      <div className="reveal reveal-delay-3 mt-16 max-w-2xl">
-        <p className="text-sm italic text-foreground/60">
-          💡 Tip: No te cortes, ¡cuantos más hits añadamos, mejor será la fiesta!
-        </p>
+        {/* Footer note */}
+        <motion.div 
+          className="mt-16 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <p className="text-sm italic text-foreground/60">
+            💡 Tip: No te cortes, ¡cuantos más hits añadamos, mejor será la fiesta!
+          </p>
+        </motion.div>
       </div>
     </section>
   );

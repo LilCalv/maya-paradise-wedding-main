@@ -5,7 +5,7 @@
  * Includes decorative Mayan glyphs at low opacity on the edges.
  */
 
-import creamTexture from "@/assets/cream-texture.jpg";
+import { motion } from "framer-motion";
 
 // SVG Mayan glyphs for decoration (simplified representations)
 const MayanGlyphLeft = () => (
@@ -42,17 +42,30 @@ const MayanGlyphRight = () => (
   </svg>
 );
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+};
+
 export function InLakesh() {
   return (
     <section
       id="in-lakesh"
-      className="relative overflow-hidden px-6 py-28 text-center md:py-36 paper-grain"
-      style={{
-        backgroundColor: "var(--cream)",
-        backgroundImage: `url(${creamTexture})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative overflow-hidden px-6 py-28 text-center md:py-36 bg-transparent"
     >
       {/* Decorative glyphs on sides */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 text-emerald-deep/40">
@@ -63,29 +76,50 @@ export function InLakesh() {
       </div>
 
       {/* Main content container */}
-      <div className="reveal mx-auto max-w-4xl">
+      <motion.div 
+        className="mx-auto max-w-4xl"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={staggerContainer}
+      >
         {/* Main title */}
-        <h2 className="font-display text-6xl italic leading-tight text-emerald-deep md:text-7xl lg:text-8xl">
+        <motion.h2 
+          className="font-display text-6xl italic leading-tight text-emerald-deep md:text-7xl lg:text-8xl"
+          variants={fadeInUp}
+        >
           In Lak'Ech
-        </h2>
-        <p className="mt-3 font-display text-4xl italic text-gold md:text-5xl">
+        </motion.h2>
+        <motion.p 
+          className="mt-3 font-display text-4xl italic text-gold md:text-5xl"
+          variants={fadeInUp}
+        >
           Hala Ken
-        </p>
+        </motion.p>
 
         {/* Subtitle with translations */}
-        <p className="reveal reveal-delay-1 mt-6 text-base uppercase tracking-[0.3em] text-emerald-deep/70">
+        <motion.p 
+          className="mt-6 text-base uppercase tracking-[0.3em] text-emerald-deep/70"
+          variants={fadeInUp}
+        >
           In talanesi in Tonatiu · Maya Sha Inlakesh – Hala Ken
-        </p>
+        </motion.p>
 
         {/* Main tagline */}
-        <p className="reveal reveal-delay-1 mt-8 font-display text-2xl italic text-emerald-deep md:text-3xl">
+        <motion.p 
+          className="mt-8 font-display text-2xl italic text-emerald-deep md:text-3xl"
+          variants={fadeInUp}
+        >
           Que en ti el Sol sea resplandor.
           <br />
           En la unicidad, yo soy otro tú, tú eres otro yo.
-        </p>
+        </motion.p>
 
         {/* Translations section */}
-        <div className="reveal reveal-delay-2 mt-12 space-y-6 rounded-2xl border-2 border-gold/20 bg-cream/50 p-8 md:p-10">
+        <motion.div 
+          className="mt-12 space-y-6 rounded-2xl border-2 border-gold/20 bg-cream/50 p-8 md:p-10"
+          variants={fadeInUp}
+        >
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-gold/80">English</p>
             <p className="mt-2 text-base italic leading-relaxed text-emerald-deep md:text-lg">
@@ -106,33 +140,48 @@ export function InLakesh() {
               Que em você o sol este brilhando. Na unidade, eu sou um outro você, você é um outro eu.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Decorative divider */}
-        <div className="reveal reveal-delay-2 ornament-divider mt-12 mx-auto max-w-xs">
+        <motion.div 
+          className="ornament-divider mt-12 mx-auto max-w-xs"
+          variants={fadeInUp}
+        >
           <span className="text-gold">✦</span>
-        </div>
+        </motion.div>
 
         {/* Body text - Main definition */}
-        <p className="reveal reveal-delay-2 mt-12 text-base leading-relaxed text-foreground/85 md:text-lg md:leading-relaxed">
+        <motion.p 
+          className="mt-12 text-base leading-relaxed text-foreground/85 md:text-lg md:leading-relaxed"
+          variants={fadeInUp}
+        >
           Este profundo <span className="font-display italic">"saludo Maya"</span>, que pone en movimiento el concepto de unidad, llega a ti como <span className="font-display italic">REGALO</span>. Es una manera hermosa de saludarnos como iguales, sin distinciones, sin prejuicios, sin discriminaciones. El reconocimiento del uno en el otro, en el Amor, el Perdón y la Fe, de saber que no estamos solos. Todos hijos de un mismo SOL, todos hermanos, iguales pero no idénticos.
-        </p>
+        </motion.p>
 
         {/* Body text - Deeper meaning */}
-        <p className="reveal reveal-delay-3 mt-8 text-base leading-relaxed text-foreground/85 md:text-lg md:leading-relaxed">
+        <motion.p 
+          className="mt-8 text-base leading-relaxed text-foreground/85 md:text-lg md:leading-relaxed"
+          variants={fadeInUp}
+        >
           Para la cultura Maya, la humanidad se encuentra en un proceso de renovación, no de conclusión. Es un proceso de mejora. Es un camino hacia una mejor actitud y, en consecuencia, a una mejor calidad de vida provocada para cada uno de nosotros. Todos somos uno. Tú eres yo, yo soy tú.
-        </p>
+        </motion.p>
 
         {/* Closing message */}
-        <p className="reveal reveal-delay-3 mt-10 text-base leading-relaxed text-foreground/85 md:text-lg md:leading-relaxed">
+        <motion.p 
+          className="mt-10 text-base leading-relaxed text-foreground/85 md:text-lg md:leading-relaxed"
+          variants={fadeInUp}
+        >
           Con este saludo Maya <span className="font-display italic text-gold">"IN LAK'ECH – HALA KEN"</span>, tomamos tu mano y, señalando hacia cada punto cardinal, te deseamos que este viaje, esta celebración y este amor sean el comienzo de algo eterno. Os vemos en Holbox. <span className="text-2xl">🌅</span>
-        </p>
+        </motion.p>
 
         {/* Subtle accent line below */}
-        <div className="reveal reveal-delay-4 mt-12 flex justify-center">
+        <motion.div 
+          className="mt-12 flex justify-center"
+          variants={fadeInUp}
+        >
           <div className="h-px w-24 bg-gradient-to-r from-transparent via-gold to-transparent" />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

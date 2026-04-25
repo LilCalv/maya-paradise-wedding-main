@@ -30,7 +30,7 @@ function MalincheSvg() {
 
 export function Footer() {
   return (
-    <footer className="bg-cream-warm px-6 py-16 text-center text-emerald-deep">
+    <footer className="bg-transparent px-6 py-16 text-center text-emerald-deep">
       {/* Malinche decorative element */}
       <div className="mb-8 flex justify-center text-gold">
         <MalincheSvg />

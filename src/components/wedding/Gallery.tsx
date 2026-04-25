@@ -17,22 +17,32 @@ const generatePhotoArray = () => {
       id: photoNum,
       src: `/fotos/foto${photoNum}.${ext}`,
       alt: `Momento ${photoNum} de la boda`,
-      // Categorizar: fotos 1-15 y números impares = pareja/íntimas
+      // Categorizar de forma más orgánica: 
+      // Números bajos (1-20) y múltiplos de 3 = pareja/íntimas
+      // Números 21-40 alternados = místico/ambiente
       // Resto = grupo/celebración
-      category: (photoNum <= 15 || photoNum % 2 !== 0) ? 'couple' : 'group',
+      category: photoNum <= 20 || photoNum % 3 === 0 ? 'couple' : 
+                (photoNum > 20 && photoNum <= 40 && photoNum % 2 === 0) ? 'mystic' : 'group',
     };
   });
 
-  // Intercalar: pareja, grupo, pareja, grupo...
+  // Intercalar de forma orgánica: pareja, místico, grupo, pareja, grupo, místico...
   const couplePhotos = allPhotos.filter(p => p.category === 'couple');
+  const mysticPhotos = allPhotos.filter(p => p.category === 'mystic');
   const groupPhotos = allPhotos.filter(p => p.category === 'group');
   
   const intercalated = [];
-  const maxLength = Math.max(couplePhotos.length, groupPhotos.length);
+  const maxLength = Math.max(couplePhotos.length, groupPhotos.length, mysticPhotos.length);
   
+  // Patrón: pareja, grupo, místico, pareja, pareja, grupo, místico...
   for (let i = 0; i < maxLength; i++) {
     if (couplePhotos[i]) intercalated.push(couplePhotos[i]);
     if (groupPhotos[i]) intercalated.push(groupPhotos[i]);
+    if (mysticPhotos[i]) intercalated.push(mysticPhotos[i]);
+    // Añadir una segunda foto de pareja cada 3 iteraciones para más balance
+    if (i % 3 === 0 && couplePhotos[i + maxLength]) {
+      intercalated.push(couplePhotos[i + maxLength]);
+    }
   }
   
   return intercalated;
@@ -83,7 +93,7 @@ export function Gallery() {
   const selectedPhoto = selectedPhotoId ? photos.find(p => p.id === selectedPhotoId) : null;
 
   return (
-    <section id="gallery" className="relative bg-cream px-6 py-28 md:py-36 paper-grain">
+    <section id="gallery" className="relative bg-transparent px-6 py-28 md:py-36">
       <div className="mx-auto max-w-7xl">
         <div className="reveal text-center mb-16">
           <p className="text-xs uppercase tracking-[0.45em] text-gold">Galería</p>

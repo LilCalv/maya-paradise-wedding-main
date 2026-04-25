@@ -1,9 +1,6 @@
 export function Goodbye() {
   return (
-    <section className="relative isolate flex min-h-[60vh] flex-col items-center justify-center overflow-hidden px-6 py-20 text-center paper-grain md:py-32"
-      style={{
-        background: "linear-gradient(180deg, var(--cream) 0%, #F9F6ED 100%)",
-      }}
+    <section className="relative isolate flex min-h-[60vh] flex-col items-center justify-center overflow-hidden px-6 py-20 text-center paper-grain md:py-32 bg-transparent"
     >
       <style>{`
         @keyframes heartbeat {

@@ -1,4 +1,4 @@
-import { ExternalLink, Hotel, MapPin, Bike, Wallet, Sun, Leaf, Bus, Ship, Zap } from "lucide-react";
+import { ExternalLink, Hotel, MapPin, Bike, Wallet, Sun, Leaf, Bus, Ship, Zap, Bed } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 function HotelCard({
@@ -60,8 +60,7 @@ export function Lodging() {
   return (
     <section
       id="lodging"
-      className="relative px-6 py-28 md:py-36"
-      style={{ backgroundColor: "var(--cream-warm)" }}
+      className="relative px-6 py-28 md:py-36 bg-transparent"
     >
       <div className="mx-auto max-w-6xl">
         <div className="reveal text-center">
@@ -194,11 +193,24 @@ export function Lodging() {
                 </h3>
               </div>
               <div className="space-y-4">
-                <HotelCard
-                  name="Hotel Pelícano"
-                  desc="Decid 'boda Claudia y Carlos' para descuento."
-                  url="#"
-                />
+                <div className="rounded-xl border border-border bg-card p-6">
+                  <p className="leading-relaxed text-foreground/85">
+                    Para los que lleguéis por la noche a Cancún, recomendamos hacer noche en Chiquilá antes de cruzar a Holbox al día siguiente.
+                  </p>
+                </div>
+                <div className="rounded-xl bg-gold/10 p-5 ring-2 ring-gold/40">
+                  <div className="flex gap-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/20 text-gold">
+                      <Bed className="h-5 w-5" strokeWidth={2} />
+                    </span>
+                    <div>
+                      <h5 className="font-display text-lg italic text-emerald-deep font-semibold">💤 Descanso Recomendado</h5>
+                      <p className="mt-1 text-sm leading-relaxed text-foreground/90">
+                        Hacer noche en Chiquilá para no madrugar tras la fiesta
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 <HotelCard name="Villas Hotel Chiquilá" desc="Opción cómoda y práctica." url="#" />
               </div>
             </div>

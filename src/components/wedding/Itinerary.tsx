@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Sailboat, Martini, Flame, Music4 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -38,15 +39,42 @@ const saturday: Event[] = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 function DayBlock({ day, date, events }: { day: string; date: string; events: Event[] }) {
   return (
-    <div className="reveal">
-      <div className="mb-10 text-center">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+    >
+      <motion.div className="mb-10 text-center" variants={itemVariants}>
         <p className="text-xs uppercase tracking-[0.45em] text-gold">{day}</p>
         <h3 className="mt-3 font-display text-3xl italic text-emerald-deep md:text-4xl">
           {date}
         </h3>
-      </div>
+      </motion.div>
 
       <ol className="relative mx-auto max-w-2xl">
         <span
@@ -56,18 +84,23 @@ function DayBlock({ day, date, events }: { day: string; date: string; events: Ev
         {events.map((ev, i) => {
           const Icon = ev.icon;
           return (
-            <li
+            <motion.li
               key={ev.title}
-              className={`reveal reveal-delay-${Math.min(i + 1, 3)} relative mb-12 flex gap-6 md:mb-16 md:grid md:grid-cols-2 md:gap-12 ${
+              variants={itemVariants}
+              className={`relative mb-12 flex gap-6 md:mb-16 md:grid md:grid-cols-2 md:gap-12 ${
                 i % 2 === 1 ? "md:[&>div:first-child]:order-2" : ""
               }`}
             >
               <div className={`md:text-right ${i % 2 === 1 ? "md:text-left" : ""}`}>
-                <span className="absolute left-7 top-1.5 z-10 -translate-x-1/2 md:left-1/2">
+                <motion.span 
+                  className="absolute left-7 top-1.5 z-10 -translate-x-1/2 md:left-1/2"
+                  whileHover={{ scale: 1.1, rotate: 180 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <span className="flex h-12 w-12 items-center justify-center rounded-full bg-cream ring-1 ring-gold/60 shadow-gold">
                     <Icon className="h-5 w-5 text-gold" strokeWidth={1.5} />
                   </span>
-                </span>
+                </motion.span>
                 <p className="ml-20 text-xs uppercase tracking-[0.35em] text-gold md:ml-0">
                   {ev.time}
                 </p>
@@ -80,25 +113,31 @@ function DayBlock({ day, date, events }: { day: string; date: string; events: Ev
                   {ev.desc}
                 </p>
               </div>
-            </li>
+            </motion.li>
           );
         })}
       </ol>
-    </div>
+    </motion.div>
   );
 }
 
 export function Itinerary() {
   return (
-    <section id="itinerary" className="relative bg-cream px-6 py-28 md:py-36 paper-grain">
+    <section id="itinerary" className="relative bg-transparent px-6 py-28 md:py-36">
       <div className="mx-auto max-w-6xl">
-        <div className="reveal text-center">
+        <motion.div 
+          className="reveal text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           <p className="text-xs uppercase tracking-[0.45em] text-gold">Itinerario</p>
-          <h2 className="mt-4 font-display text-5xl italic text-emerald-deep md:text-6xl">
+          <h2 className="mt-4 font-display text-5xl italic text-emerald-deep md:text-6xl" style={{ letterSpacing: "0.01em" }}>
             Nuestra Aventura Juntos
           </h2>
           <div className="ornament-divider mt-8 mx-auto max-w-sm" />
-        </div>
+        </motion.div>
 
         <div className="mt-20 space-y-24">
           <DayBlock day="Día Uno" date="Viernes 4 de Diciembre" events={friday} />

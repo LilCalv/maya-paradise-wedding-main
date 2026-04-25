@@ -1,14 +1,39 @@
+import { motion } from "framer-motion";
 import aerial from "@/assets/holbox-aerial.jpg";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+  }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
 
 export function Venue() {
   return (
     <section
       id="venue"
-      className="relative px-6 py-28 md:py-36"
-      style={{ backgroundColor: "var(--cream-warm)" }}
+      className="relative px-6 py-28 md:py-36 bg-transparent"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="reveal text-center">
+        <motion.div 
+          className="text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeInUp}
+        >
           <p className="text-xs uppercase tracking-[0.45em] text-gold">
             El Lugar
           </p>
@@ -16,26 +41,38 @@ export function Venue() {
             Nuestro refugio en el paraíso
           </h2>
           <div className="ornament-divider mt-8 mx-auto max-w-sm" />
-        </div>
+        </motion.div>
 
-        <div className="mt-16 grid gap-12 md:grid-cols-5 md:items-center">
-          <div className="reveal reveal-delay-1 md:col-span-3">
-            <div className="overflow-hidden rounded-2xl shadow-soft ring-1 ring-emerald-deep/10">
-              <img
+        <motion.div 
+          className="mt-16 grid gap-12 md:grid-cols-5 md:items-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
+          <motion.div className="md:col-span-3" variants={fadeInUp}>
+            <motion.div 
+              className="overflow-hidden rounded-2xl shadow-soft ring-1 ring-emerald-deep/10"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.4 }}
+            >
+              <motion.img
                 src={aerial}
                 alt="Vista aérea del Hotel Las Nubes en Holbox"
                 width={1600}
                 height={1000}
                 loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-[1500ms] hover:scale-105"
+                className="h-full w-full object-cover"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
               />
-            </div>
+            </motion.div>
             <p className="mt-3 text-center text-xs uppercase tracking-[0.3em] text-muted-foreground">
               Hotel Las Nubes · Isla de Holbox
             </p>
-          </div>
+          </motion.div>
 
-          <div className="reveal reveal-delay-2 md:col-span-2">
+          <motion.div className="md:col-span-2" variants={fadeInUp}>
             <p className="font-display text-xl italic leading-relaxed text-emerald-deep/90 md:text-2xl">
               “Donde el mar se funde con el cielo en tonos turquesa y dorados.”
             </p>
@@ -62,8 +99,8 @@ export function Venue() {
                 ¡Bienvenidos a nuestro pequeño paraíso!
               </p>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
